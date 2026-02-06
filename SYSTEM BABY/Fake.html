@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Booking System v7</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <div id="policyNotice" class="notice">
+            ⚠️ <b>System Notice:</b> Ang mga account na walang login activity sa loob ng <b>1 taon</b> ay kusa naming i-vo-void.
+        </div>
+
+        <div id="regSection">
+            <h2>Create Account</h2>
+            <input type="text" id="regName" placeholder="Full Name">
+            <input type="email" id="regEmail" placeholder="Email Address">
+            <input type="password" id="regPass" placeholder="Password">
+            <select id="regRole">
+                <option value="student">Student (Client)</option>
+                <option value="frontdesk">Front Desk (Admin)</option>
+            </select>
+            <button onclick="auth.register()" class="btn-blue">Register & Send OTP</button>
+            <p style="text-align:center; font-size:13px; margin-top:15px;">
+                May account na? <a href="#" onclick="ui.goToLogin()">Mag-Login dito</a>
+            </p>
+        </div>
+
+        <div id="verifySection" class="hidden">
+            <h2>Verify Account</h2>
+            <div class="otp-box">
+                <small>Ang iyong verification code ay:</small>
+                <h2 id="generatedOTP" style="color:var(--accent); letter-spacing:8px; margin:10px 0;">0000</h2>
+            </div>
+            <input type="number" id="inputOTP" placeholder="Ilagay ang 4-digit code">
+            <button onclick="auth.verify()" class="btn-blue">Verify & Complete</button>
+            <button onclick="ui.goToRegister()" style="background:none; color:gray; font-size:12px; width:100%;">Mali ang email? Balik sa Register</button>
+        </div>
+
+        <div id="loginSection" class="hidden">
+            <h2>Login</h2>
+            <input type="email" id="loginEmail" placeholder="Email Address">
+            <input type="password" id="loginPass" placeholder="Password">
+            <button onclick="auth.login()" class="btn-blue">Login</button>
+            <p style="text-align:center; font-size:13px; margin-top:15px;">
+                Wala pang account? <a href="#" onclick="ui.goToRegister()">Gumawa ng Account</a>
+            </p>
+        </div>
+
+        <div id="studentView" class="hidden">
+            <h3>Student Portal</h3>
+            <p>Welcome, <b id="studentName"></b>!</p>
+            <div class="card" style="border:none; padding:0;">
+                <label style="font-size:13px; font-weight:bold;">Anong dokumento ang kailangan?</label>
+                <select id="docType">
+                    <option>Transcript of Records (TOR)</option>
+                    <option>Good Moral Certificate</option>
+                    <option>Diploma Copy</option>
+                </select>
+                <label style="font-size:13px; font-weight:bold;">Target Date ng Pagkuha:</label>
+                <input type="date" id="reqDate">
+                <button onclick="booking.submit()" class="btn-blue">Submit Booking</button>
+            </div>
+            <hr>
+            <h4>Status ng aking Request:</h4>
+            <div id="studentStatusList"></div>
+            <button onclick="auth.logout()" class="btn-logout">Logout</button>
+        </div>
+
+        <div id="adminView" class="hidden">
+            <h3>Admin Dashboard</h3>
+            <div style="margin-top:20px;">
+                <h4>Monitor Requests</h4>
+                <div id="adminList"></div>
+            </div>
+            <div style="margin-top:20px; border-top: 2px solid #eee; padding-top:15px;">
+                <h4>Student Accounts (Inactivity Tracker)</h4>
+                <div id="userList"></div>
+            </div>
+            <button onclick="auth.logout()" class="btn-logout">Logout</button>
+        </div>
+    </div>
+    
+    <div id="customModal" class="modal-overlay hidden">
+    <div class="modal-box">
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <button onclick="closeModal()" class="btn-blue">OK</button>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal-overlay hidden">
+    <div class="modal-box">
+        <h3 style="color: var(--danger);">🗑 Delete Request</h3>
+        <p>Sigurado ka bang gusto mong idelete ang request na ito?</p>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+            <button onclick="closeDeleteModal()" style="flex:1; background:#eee; border:none; padding:10px; border-radius:8px;">
+                Cancel
+            </button>
+            <button onclick="confirmDelete()" style="flex:1; background:var(--danger); color:white; border:none; padding:10px; border-radius:8px;">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

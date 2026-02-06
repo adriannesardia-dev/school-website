@@ -200,20 +200,14 @@
                 padding-top: 10px;
             }
             .container {
-                max-height: 95vh;
-            }
-        }
-
-        @media (max-width: 600px) {
-        body {
-            padding: 10px;
-        }
-
-        .container {
             margin-top: 10px;
             margin-bottom: 10px;
             border-radius: 10px;
             max-height: calc(100vh - 20px);
             }
         }
-
+        @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+    }

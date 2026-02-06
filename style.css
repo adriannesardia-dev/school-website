@@ -8,14 +8,20 @@
             background-size:cover;
             margin: 0; 
             padding: 15px;
+            display: block;
+            overflow-y: auto;
         }
         .container { 
-            max-width: 500px; 
-            margin: auto; 
             background: linear-gradient(129deg, #FFB3A6 0%, #FFE4E1 100%);
-            padding: 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+            max-height: calc(100vh - 30px);
+            overflow-y: auto;
         }
         .hidden { 
             display: none !important; 
@@ -163,11 +169,7 @@
         }
         html, body {
             height: 98.4%;
-        }
-        .container {
-            max-height  : 92vh;
-            overflow-y: auto;
-        
+            margin: 0;
         }
         .container::-webkit-scrollbar-thumb {
             background: #ccc;
@@ -199,6 +201,19 @@
             }
             .container {
                 max-height: 95vh;
+            }
+        }
+
+        @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        .container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            max-height: calc(100vh - 20px);
             }
         }
 
